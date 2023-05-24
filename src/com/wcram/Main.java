@@ -4,10 +4,13 @@ import java.util.Scanner;
 
 public class Main {
 
+    // Make scanner global
+    static Scanner scanner = new Scanner(System.in); // Creates the scanner
+
     public static void main(String[] args) {
 
-
-
+        Menu();
+//        DoMath();
     } // main
 
     public static void Menu() {
@@ -17,33 +20,76 @@ public class Main {
         // 3 - Exit
         // println goes to next line
 
-        System.out.println("Welcome to our menu");
-        System.out.println("1 - Print Numbers");
-        System.out.println("2 - Do Math");
-        System.out.println("3 - Exit");
-        // print() stays on the same line
-        System.out.print("Please enter a selection: ");
+        // Flag variable to keep track if something is running
+        boolean isRunning = true;
 
-        // Need to have this line to ask the user for their input
-        Scanner scanner = new Scanner(System.in); // Creates the scanner
-        String userInput = scanner.nextLine(); // Asks the user for their input
+        do {
+            System.out.println("Welcome to our menu");
+            System.out.println("1 - Print Numbers");
+            System.out.println("2 - Do Math");
+            System.out.println("3 - Exit");
+            // print() stays on the same line
+            System.out.print("Please enter a selection: ");
 
-        // switch, case, break , default
-        switch(userInput) {
-            case "1" :
-                System.out.println("You want to print numbers.");
-                break;
-            case "2" :
-                System.out.println("You want to do some math.");
-                break;
-            case "3" :
-                System.out.println("You want to exit the app.");
-                break;
-            default : // Default is like the else block, it will run if nothing is runs
-                System.out.println("Please choose a valid choice.");
-                break;
+            // Need to have this line to ask the user for their input
 
-        } // End of switch
+            String userInput = scanner.nextLine(); // Asks the user for their input
+
+            // switch, case, break , default
+            switch(userInput) {
+                case "1" :
+                    // Ask the user for 2 numbers
+                    // Print from one number to another
+                    System.out.println("You want to print numbers.");
+                    PrintNumbers();
+                    break;
+                case "2" :
+                    System.out.println("You want to do some math.");
+                    DoMath();
+                    break;
+                case "3" : // Exit case
+                    System.out.println("You want to exit the app.");
+                    isRunning = false;
+                    break;
+                default : // Default is like the else block, it will run if nothing is runs
+                    System.out.println("Please choose a valid choice.");
+                    break;
+
+            } // End of switch
+        } while(isRunning); // Condition that will let you exit your code
+
+
+    } // Menu
+
+    public static void PrintNumbers() {
+        // Ask the user for a start and end number
+        System.out.print("Please enter your first number: ");
+        int start = scanner.nextInt();
+
+        scanner.nextLine(); // Clears the scanner
+
+        System.out.print("Please enter you next number: ");
+        int end = scanner.nextInt();
+
+        for (int i = start; i < end; i++) {
+            System.out.println(i);
+        }
+    } // PrintNumbers
+
+    public static void DoMath() {
+        System.out.print("Please enter your first number: ");
+        double number1 = scanner.nextDouble();
+
+        scanner.nextLine();
+
+        System.out.print("Please enter your second number: ");
+        double number2 = scanner.nextDouble();
+
+        double sum = number1 + number2;
+        // number1 + number2 = sum
+        String formattedResult = String.format("%s + %s = %s\n", number1, number2, sum);
+        System.out.printf(formattedResult);
+
     }
 
     public static void ForLoopExamples() {
